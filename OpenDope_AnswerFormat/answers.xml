@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<answers>
+  <answer qref="a1">answer</answer>
+  <answer qref="a2">answer</answer>
+  <repeat qref="r1">
+    <row>
+      <answer qref="q2">foo</answer>
+      <repeat qref="rr1">
+        <row>
+          <answer qref="rr1-1">bar</answer>
+          <answer qref="rr1-2">bar</answer>
+        </row>
+        <row>
+          <answer qref="rr2-1">bar</answer>
+          <answer qref="rr2-2">bar</answer>
+        </row>
+      </repeat>
+    </row>
+    <row>
+      <answer qref="q2">foo</answer>
+      <repeat qref="rr1">
+        <row>
+          <answer qref="rr1-1">bar</answer>
+          <answer qref="rr1-2">bar</answer>
+        </row>
+        <row>
+          <answer qref="rr2-1">bar</answer>
+          <answer qref="rr2-2">bar</answer>
+        </row>
+      </repeat>
+    </row>
+  </repeat>
+  <answer qref="a3">answer</answer>
+  <answer qref="a4">answer</answer>
+  
+</answers>

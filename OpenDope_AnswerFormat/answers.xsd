@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:answers="http://opendope.org/answers" attributeFormDefault="unqualified" 
+           elementFormDefault="qualified" targetNamespace="http://opendope.org/answers" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="answers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element minOccurs="0" ref="answers:answer" />
+          <xs:element minOccurs="0" ref="answers:repeat" />
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="repeat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:choice maxOccurs="unbounded">
+                <xs:element minOccurs="0" ref="answers:answer" />
+                <xs:element minOccurs="0" ref="answers:repeat" />
+              </xs:choice>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="qref" type="xs:string" use="required" />
+      <xs:attribute name="source" type="xs:string" use="optional" />
+      <!-- if this answer is in the library, the store item id of the original answer part -->
+
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="answer">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="id" type="xs:string" use="required" />
+          <xs:attribute name="source" type="xs:string" use="optional" />
+          <!-- if this answer is in the library, the store item id of the original answer part -->
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI onLoad="Ribbon_Load" xmlns="http://schemas.microsoft.com/office/2006/01/customui" loadImage="LoadImage">
+  <ribbon>
+    <tabs>
+      <tab id="TabOpenDoPE" label="FabDocx Author">
+        <group id="plutextGroup" label="Start">
+
+          <button id="buttonAddDoPE" onAction="buttonAddDoPE_Click"
+                  imageMso="GetExternalDataFromWeb"
+                  label="FabDocx enable" showImage="false" 
+                  getEnabled="IsAddDoPEEnabled" 
+          size="large" />
+
+          <!--
+          <button id="buttonShowCTP" onAction="buttonShowCTP_Click"
+                  label="Show task pane" showImage="false" 
+                  getEnabled="IsShowCTPEnabled" /> -->
+
+
+          <!--<separator id="separator1" />-->
+
+        </group>
+
+        <group id="plutextGroupT" label="Topics">
+          <button
+            id="buttonNarrativeAdd"
+            imageMso="GroupHeaderFooterExcel"
+            onAction="buttonNarrativeAdd_Click"
+                label="Add Narrative"
+getEnabled="IsNarrativeEnabled"
+                size="large" />
+
+        </group>
+
+
+        <group id="plutextGroup2" label="Textual Q/A">
+            <button
+              id="buttonBind"
+              imageMso="HeaderInsertGallery"
+              onAction="buttonBind_Click"
+                  label="Insert Q/A"
+getEnabled="IsBindEnabled"
+                  size="large" />
+
+          <button
+            id="buttonEditQuestion"
+              imageMso="MailMergeResultsPreview"
+            onAction="buttonEditQuestion_Click"
+                label="Edit Question"
+getEnabled="IsEditQuestionEnabled"
+                size="large" />
+
+          <button
+            id="buttonFormat"
+              imageMso="DollarSign"
+            onAction="buttonFormat_Click"
+                label="Format Answer"
+getEnabled="IsFormatEnabled"
+                size="large" />
+
+        </group>
+
+        <!--idMso="ContentControlText"-->
+
+        <group id="plutextGroup3" label="Conditional">
+          
+          <button id="buttonCondition" 
+                    imageMso="OutlineGroup"
+            onAction="buttonCondition_Click"
+                  label="Wrap with Condition"
+getEnabled="IsConditionEnabled"
+                  size="large" />
+
+          <button id="buttonConditionEdit"
+                    imageMso="OutlineGroup"
+            onAction="buttonConditionEdit_Click"
+                  label="Edit Condition"
+getEnabled="IsConditionEditEnabled"
+                  size="large" />
+
+        </group>
+        <group id="plutextGroup4" label="Repeat">
+            <!-- What's with all the groups? 
+                 To show the same idMso a second time, it has to be in a separate group. -->
+            <button id="buttonRepeat"
+                    imageMso="OutlineGroup"
+            onAction="buttonRepeat_Click"
+                  label="Wrap with Repeat"
+getEnabled="IsRepeatEnabled"
+                  size="large" />
+
+        </group>
+        
+        <group id="plutextGroupLibrary" label="Library">
+
+          <button id="buttonBuildingBlockSave"
+                    imageMso="OutlineGroup"
+            onAction="buttonBuildingBlockSave_Click"
+                  label="Save"
+getEnabled="IsBuildingBlockSaveEnabled"
+                  size="large" />
+
+          <gallery 
+                    idMso="CustomGallery1"
+                  label="Reuse"
+                  size="large"
+                     />
+<!--
+id="buttonBuildingBlockUse"
+            onAction="buttonBuildingBlockUse_Click"
+getEnabled="IsBuildingBlockUseEnabled"
+-->
+        </group>
+        
+        <group id="plutextGroup5" label="Information">
+
+          <toggleButton id="buttonLogicExplorer" onAction="buttonLogicExplorer_Click"
+                  imageMso="MacroNames"
+                label="Logic explorer"
+getEnabled="IsLogicExplorerEnabled"
+                size="large" />
+
+          <!--<button idMso="ControlProperties"
+                label="Properties"
+                size="large" />-->
+
+          <toggleButton idMso="DesignMode"
+                label="Show tags"
+                size="large" />
+
+        </group>
+        <group id="plutextGroup6" label="Testing">
+
+          <!--<button id="buttonInjectMacro" onAction="buttonInjectMacro_Click"
+                  imageMso="UpgradeDocument"
+                  label="Run Macro" showImage="false"
+                  getEnabled="isInjectMacroEnabled"
+                                  size="large" />-->
+
+          <button id="buttonQuestionOrder" onAction="buttonQuestionOrder_Click"
+                  imageMso="OutlookGlobe"
+                  label="Reorder Questions" showImage="false"
+                  getEnabled="IsQuestionOrderEnabled"                  
+                size="large" />
+
+
+          <button id="buttonTestInBrowser" onAction="buttonLaunchBrowser_Click"
+                  imageMso="OutlookGlobe"
+                  label="Web interview" showImage="false"
+                size="large" />
+        </group>
+        <group id="plutextGroup7" label="Other">
+
+          <button id="buttonOptions" onAction="buttonOptions_Click"
+                  imageMso="ControlsGallery"
+                  label="Config" showImage="false"
+getEnabled="IsOptionsEnabled"
+                                  size="large" />
+
+          <button id="buttonSingleP" onAction="buttonSingleParagraph_Click"
+                  imageMso="ControlsGallery"
+                  label="Squash to paragraph" showImage="false"
+getEnabled="IsSingleParagraphEnabled"
+                                  size="large" />
+
+          <button id="buttonInsertP" onAction="buttonParagraphAdd_Click"
+                  imageMso="ControlsGallery"
+                  label="Split Paragraph" showImage="false"
+getEnabled="IsParagraphAddEnabled"
+                                  size="large" />
+
+          <!--
+            <button id="buttonPreviousDoc" onAction="buttonPreviousDoc_Click" 
+                     imageMso="MailMergeGoToPreviousRecord" label="button2" showLabel="false"
+                     getEnabled="IsPreviousDocEnabled" 
+                      getScreentip="buttonPreviousDoc_Screentip" />
+            
+            <button id="buttonNextDoc" onAction="buttonNextDoc_Click"
+                    imageMso="MailMergeGoToNextRecord" label="button2" showLabel="false" 
+                     getEnabled="IsNextDocEnabled" 
+                    getScreentip="buttonNextDoc_Screentip" />
+                    
+-->                    
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
