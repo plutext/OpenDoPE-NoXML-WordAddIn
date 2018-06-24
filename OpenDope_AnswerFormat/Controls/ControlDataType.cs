@@ -60,6 +60,10 @@ namespace OpenDope_AnswerFormat.Controls
 
             this.listBoxDataTypes.Items.Add("card number");
 
+            this.listBoxDataTypes.Items.Add("Word rich text (docx Flat OPC XML)");
+
+            this.listBoxDataTypes.Items.Add("XHTML (non-interactive)");
+
             // Default
             listBoxDataTypes.SelectedItem = "text";
 
@@ -76,20 +80,32 @@ namespace OpenDope_AnswerFormat.Controls
             if (listBoxDataTypes.SelectedItem.ToString().Equals("date"))
             {
                 this.ControlDataTypeMAIN.controlDataTypeString.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeNumber.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeDate.Visible = true;
                 this.ControlDataTypeMAIN.controlDataTypeCreditCard.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeEmail.Visible = false;
-
                 //this.textBoxSampleAnswer.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 //this.textBoxSampleAnswer.ReadOnly = true;
-                    // Can't trust them to type something valid here.
-                    // They can use the date picker if they want another date.
-                
+                // Can't trust them to type something valid here.
+                // They can use the date picker if they want another date.
+
             }
-            else if (listBoxDataTypes.SelectedItem.ToString().Equals("text"))
+            else if (listBoxDataTypes.SelectedItem.ToString().Equals("text")
+                || listBoxDataTypes.SelectedItem.ToString().StartsWith("XHTML")
+                )
             {
                 this.ControlDataTypeMAIN.controlDataTypeString.Visible = true;
+                this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeNumber.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeDate.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeCreditCard.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeEmail.Visible = false;
+            }
+            else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("Word"))
+            {
+                this.ControlDataTypeMAIN.controlDataTypeString.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.Visible = true;
                 this.ControlDataTypeMAIN.controlDataTypeNumber.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeDate.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeCreditCard.Visible = false;
@@ -98,6 +114,7 @@ namespace OpenDope_AnswerFormat.Controls
             else if (listBoxDataTypes.SelectedItem.ToString().Equals("number"))
             {
                 this.ControlDataTypeMAIN.controlDataTypeString.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeNumber.Visible = true;
                 this.ControlDataTypeMAIN.controlDataTypeDate.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeCreditCard.Visible = false;
@@ -106,6 +123,7 @@ namespace OpenDope_AnswerFormat.Controls
             else if (listBoxDataTypes.SelectedItem.ToString().Equals("email"))
             {
                 this.ControlDataTypeMAIN.controlDataTypeString.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeNumber.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeDate.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeCreditCard.Visible = false;
@@ -114,6 +132,7 @@ namespace OpenDope_AnswerFormat.Controls
             else if (listBoxDataTypes.SelectedItem.ToString().Equals("card number"))
             {
                 this.ControlDataTypeMAIN.controlDataTypeString.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeNumber.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeDate.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeCreditCard.Visible = true;
@@ -124,6 +143,11 @@ namespace OpenDope_AnswerFormat.Controls
                 // Shouldn't happen!!
                 log.Error("Unrecognised selection: " + listBoxDataTypes.SelectedItem);
             }
+        }
+
+        public bool isFlatOpc()
+        {
+            return (listBoxDataTypes.SelectedItem.ToString().StartsWith("Word"));
         }
 
         public void populateControl(xpathsXpath xpathObj, responseFree rF, string sampleAnswer, string hint)
@@ -137,6 +161,12 @@ namespace OpenDope_AnswerFormat.Controls
                 listBoxDataTypes.SelectedItem = "text";
                 // TODO: visible stuff?
                 this.ControlDataTypeMAIN.controlDataTypeString.populateControl(xpathObj, sampleAnswer, false, hint);
+            }
+            else if (xpathObj.type.Equals("FlatOpcXml"))
+            {
+                listBoxDataTypes.SelectedItem = "Word rich text (docx Flat OPC XML)";
+                this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.populateControl(xpathObj, sampleAnswer, false, hint);
+
             }
             else if (xpathObj.type.Equals("date"))
             {
@@ -207,6 +237,10 @@ namespace OpenDope_AnswerFormat.Controls
             {
                 this.ControlDataTypeMAIN.controlDataTypeString.populateXPath(xpathObj);
             }
+            else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("Word"))
+            {
+                this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.populateXPath(xpathObj);
+            }
             else if (listBoxDataTypes.SelectedItem.ToString().Equals("number"))
             {
                 this.ControlDataTypeMAIN.controlDataTypeNumber.populateXPath(xpathObj);
@@ -260,6 +294,11 @@ namespace OpenDope_AnswerFormat.Controls
             {
                 return this.ControlDataTypeMAIN.controlDataTypeString.textBoxHint.Text;
             }
+            else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("Word"))
+            {
+                return null;
+                //return this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.textBoxHint.Text;
+            }
             else if (listBoxDataTypes.SelectedItem.ToString().Equals("number"))
             {
                 return this.ControlDataTypeMAIN.controlDataTypeNumber.textBoxHint.Text;
@@ -292,6 +331,10 @@ namespace OpenDope_AnswerFormat.Controls
             else if (listBoxDataTypes.SelectedItem.ToString().Equals("text"))
             {
                 return this.ControlDataTypeMAIN.controlDataTypeString.checkBoxRequired.Checked;
+            }
+            else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("Word"))
+            {
+                return false;
             }
             else if (listBoxDataTypes.SelectedItem.ToString().Equals("number"))
             {
@@ -344,6 +387,10 @@ namespace OpenDope_AnswerFormat.Controls
             {
                 return this.ControlDataTypeMAIN.controlDataTypeString.getSampleAnswer();
             }
+            else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("Word"))
+            {
+                return this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.getSampleAnswer();
+            }
             else if (listBoxDataTypes.SelectedItem.ToString().Equals("number"))
             {
                 return this.ControlDataTypeMAIN.controlDataTypeNumber.getSampleAnswer();
@@ -380,6 +427,10 @@ namespace OpenDope_AnswerFormat.Controls
             else if (listBoxDataTypes.SelectedItem.ToString().Equals("text"))
             {
                 return this.ControlDataTypeMAIN.controlDataTypeString.checkBoxPopulateForm.Checked;
+            }
+            else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("Word"))
+            {
+                return false; 
             }
             else if (listBoxDataTypes.SelectedItem.ToString().Equals("number"))
             {

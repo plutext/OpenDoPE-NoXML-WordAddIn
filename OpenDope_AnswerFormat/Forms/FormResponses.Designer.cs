@@ -129,7 +129,7 @@ namespace OpenDope_AnswerFormat
             this.checkBoxInsertControl.TabIndex = 0;
             this.checkBoxInsertControl.Text = "Add content control (show answer in document)";
             this.checkBoxInsertControl.UseVisualStyleBackColor = true;
-            this.checkBoxInsertControl.CheckedChanged += new System.EventHandler(this.checkBoxInsertControl_CheckedChanged);
+            //this.checkBoxInsertControl.CheckedChanged += new System.EventHandler(this.checkBoxInsertControl_CheckedChanged);
             // 
             // FormResponses
             // 

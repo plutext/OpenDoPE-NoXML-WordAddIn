@@ -33,6 +33,7 @@
             this.controlDataType1.ControlDataTypeMAIN = this;
             this.controlDataTypeNumber = new OpenDope_AnswerFormat.Controls.ControlDataTypeNumber();
             this.controlDataTypeString = new OpenDope_AnswerFormat.Controls.ControlDataTypeString();
+            this.controlDataTypeFlatOpcXml = new OpenDope_AnswerFormat.Controls.ControlDataTypeFlatOpcXml();
             this.controlDataTypeDate = new OpenDope_AnswerFormat.Controls.ControlDataTypeDate();
             this.controlDataTypeCreditCard = new OpenDope_AnswerFormat.Controls.ControlDataTypeCreditCard();
             this.controlDataTypeEmail = new OpenDope_AnswerFormat.Controls.ControlDataTypeEmail();
@@ -67,6 +68,12 @@
             this.controlDataTypeString.TabIndex = 7;
             this.controlDataTypeString.Visible = false;
 
+            this.controlDataTypeFlatOpcXml.Location = new System.Drawing.Point(110, 13);
+            this.controlDataTypeFlatOpcXml.Name = "controlDataTypeFlatOpcXml";
+            this.controlDataTypeFlatOpcXml.Size = new System.Drawing.Size(321, 296);
+            this.controlDataTypeFlatOpcXml.TabIndex = 7;
+            this.controlDataTypeFlatOpcXml.Visible = false;
+
             this.controlDataTypeDate.Location = new System.Drawing.Point(110, 13);
             this.controlDataTypeDate.Name = "controlDataTypeDate";
             this.controlDataTypeDate.Size = new System.Drawing.Size(321, 296);
@@ -93,6 +100,7 @@
             this.Controls.Add(this.controlDataType1);
             this.Controls.Add(this.controlDataTypeNumber);
             this.Controls.Add(this.controlDataTypeString);
+            this.Controls.Add(this.controlDataTypeFlatOpcXml);
             this.Controls.Add(this.controlDataTypeDate);
             this.Controls.Add(this.controlDataTypeCreditCard);
             this.Controls.Add(this.controlDataTypeEmail);
@@ -111,6 +119,7 @@
         // Only one of these will be relevant
         public Controls.ControlDataTypeNumber controlDataTypeNumber { get; set; }
         public Controls.ControlDataTypeString controlDataTypeString { get; set; }
+        public Controls.ControlDataTypeFlatOpcXml controlDataTypeFlatOpcXml { get; set; }
         public Controls.ControlDataTypeDate controlDataTypeDate { get; set; }
         public Controls.ControlDataTypeCreditCard controlDataTypeCreditCard { get; set; }
         public Controls.ControlDataTypeEmail controlDataTypeEmail { get; set; }
