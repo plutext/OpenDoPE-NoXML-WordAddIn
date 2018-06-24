@@ -242,11 +242,23 @@
     <Compile Include="Controls\ControlDataType.Designer.cs">
       <DependentUpon>ControlDataType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ControlDataTypeXHTML.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ControlDataTypeXHTML.Designer.cs">
+      <DependentUpon>ControlDataTypeXHTML.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ControlDataTypeMAIN.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ControlDataTypeMAIN.Designer.cs">
       <DependentUpon>ControlDataTypeMAIN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ControlDataTypeFlatOpcXml.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ControlDataTypeFlatOpcXml.Designer.cs">
+      <DependentUpon>ControlDataTypeFlatOpcXml.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ControlDataTypeString.cs">
       <SubType>UserControl</SubType>
@@ -407,8 +419,14 @@
     <EmbeddedResource Include="Controls\ControlDataType.resx">
       <DependentUpon>ControlDataType.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ControlDataTypeXHTML.resx">
+      <DependentUpon>ControlDataTypeXHTML.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ControlDataTypeMAIN.resx">
       <DependentUpon>ControlDataTypeMAIN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ControlDataTypeFlatOpcXml.resx">
+      <DependentUpon>ControlDataTypeFlatOpcXml.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ControlDataTypeString.resx">
       <DependentUpon>ControlDataTypeString.cs</DependentUpon>

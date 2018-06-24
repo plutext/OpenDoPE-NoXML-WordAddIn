@@ -81,6 +81,7 @@ namespace OpenDope_AnswerFormat.Controls
             {
                 this.ControlDataTypeMAIN.controlDataTypeString.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeXHTML.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeNumber.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeDate.Visible = true;
                 this.ControlDataTypeMAIN.controlDataTypeCreditCard.Visible = false;
@@ -91,12 +92,11 @@ namespace OpenDope_AnswerFormat.Controls
                 // They can use the date picker if they want another date.
 
             }
-            else if (listBoxDataTypes.SelectedItem.ToString().Equals("text")
-                || listBoxDataTypes.SelectedItem.ToString().StartsWith("XHTML")
-                )
+            else if (listBoxDataTypes.SelectedItem.ToString().Equals("text") )
             {
                 this.ControlDataTypeMAIN.controlDataTypeString.Visible = true;
                 this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeXHTML.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeNumber.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeDate.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeCreditCard.Visible = false;
@@ -106,6 +106,17 @@ namespace OpenDope_AnswerFormat.Controls
             {
                 this.ControlDataTypeMAIN.controlDataTypeString.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.Visible = true;
+                this.ControlDataTypeMAIN.controlDataTypeXHTML.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeNumber.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeDate.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeCreditCard.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeEmail.Visible = false;
+            }
+            else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("XHTML"))
+            {
+                this.ControlDataTypeMAIN.controlDataTypeString.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeXHTML.Visible = true;
                 this.ControlDataTypeMAIN.controlDataTypeNumber.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeDate.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeCreditCard.Visible = false;
@@ -115,6 +126,7 @@ namespace OpenDope_AnswerFormat.Controls
             {
                 this.ControlDataTypeMAIN.controlDataTypeString.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeXHTML.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeNumber.Visible = true;
                 this.ControlDataTypeMAIN.controlDataTypeDate.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeCreditCard.Visible = false;
@@ -124,6 +136,7 @@ namespace OpenDope_AnswerFormat.Controls
             {
                 this.ControlDataTypeMAIN.controlDataTypeString.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeXHTML.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeNumber.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeDate.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeCreditCard.Visible = false;
@@ -133,6 +146,7 @@ namespace OpenDope_AnswerFormat.Controls
             {
                 this.ControlDataTypeMAIN.controlDataTypeString.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.Visible = false;
+                this.ControlDataTypeMAIN.controlDataTypeXHTML.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeNumber.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeDate.Visible = false;
                 this.ControlDataTypeMAIN.controlDataTypeCreditCard.Visible = true;
@@ -148,6 +162,10 @@ namespace OpenDope_AnswerFormat.Controls
         public bool isFlatOpc()
         {
             return (listBoxDataTypes.SelectedItem.ToString().StartsWith("Word"));
+        }
+        public bool isXHTML()
+        {
+            return (listBoxDataTypes.SelectedItem.ToString().StartsWith("XHTML"));
         }
 
         public void populateControl(xpathsXpath xpathObj, responseFree rF, string sampleAnswer, string hint)
@@ -166,6 +184,12 @@ namespace OpenDope_AnswerFormat.Controls
             {
                 listBoxDataTypes.SelectedItem = "Word rich text (docx Flat OPC XML)";
                 this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.populateControl(xpathObj, sampleAnswer, false, hint);
+
+            }
+            else if (xpathObj.type.Equals("XHTML"))
+            {
+                listBoxDataTypes.SelectedItem = "XHTML (non-interactive)";
+                this.ControlDataTypeMAIN.controlDataTypeXHTML.populateControl(xpathObj, sampleAnswer, false, hint);
 
             }
             else if (xpathObj.type.Equals("date"))
@@ -241,6 +265,10 @@ namespace OpenDope_AnswerFormat.Controls
             {
                 this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.populateXPath(xpathObj);
             }
+            else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("XHTML"))
+            {
+                this.ControlDataTypeMAIN.controlDataTypeXHTML.populateXPath(xpathObj);
+            }
             else if (listBoxDataTypes.SelectedItem.ToString().Equals("number"))
             {
                 this.ControlDataTypeMAIN.controlDataTypeNumber.populateXPath(xpathObj);
@@ -299,6 +327,11 @@ namespace OpenDope_AnswerFormat.Controls
                 return null;
                 //return this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.textBoxHint.Text;
             }
+            else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("XHTML"))
+            {
+                return null;
+                //return this.ControlDataTypeMAIN.controlDataTypeXHTML.textBoxHint.Text;
+            }
             else if (listBoxDataTypes.SelectedItem.ToString().Equals("number"))
             {
                 return this.ControlDataTypeMAIN.controlDataTypeNumber.textBoxHint.Text;
@@ -333,6 +366,10 @@ namespace OpenDope_AnswerFormat.Controls
                 return this.ControlDataTypeMAIN.controlDataTypeString.checkBoxRequired.Checked;
             }
             else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("Word"))
+            {
+                return false;
+            }
+            else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("XHTML"))
             {
                 return false;
             }
@@ -391,6 +428,10 @@ namespace OpenDope_AnswerFormat.Controls
             {
                 return this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.getSampleAnswer();
             }
+            else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("XHTML"))
+            {
+                return this.ControlDataTypeMAIN.controlDataTypeXHTML.getSampleAnswer();
+            }
             else if (listBoxDataTypes.SelectedItem.ToString().Equals("number"))
             {
                 return this.ControlDataTypeMAIN.controlDataTypeNumber.getSampleAnswer();
@@ -431,6 +472,10 @@ namespace OpenDope_AnswerFormat.Controls
             else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("Word"))
             {
                 return false; 
+            }
+            else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("XHTML"))
+            {
+                return false;
             }
             else if (listBoxDataTypes.SelectedItem.ToString().Equals("number"))
             {

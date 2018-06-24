@@ -280,9 +280,15 @@ namespace OpenDope_AnswerFormat
             if (formDataType.controlDataTypeMAIN1.controlDataType1.isFlatOpc())
             {
 
-//                xml = "<oda:answer id=\"" + q.id + "\" xmlns:oda=\"http://opendope.org/answers\">&lt;?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?&gt;&lt;pkg:package xmlns:pkg=\"http://schemas.microsoft.com/office/2006/xmlPackage\" &gt;&lt;pkg:part pkg:name=\"/_rels/.rels\" pkg:contentType=\"application/vnd.openxmlformats-package.relationships+xml\"&gt;&lt;pkg:xmlData&gt;&lt;rel:Relationships xmlns:rel=\"http://schemas.openxmlformats.org/package/2006/relationships\"&gt;&lt;rel:Relationship Id=\"rId1\" Target=\"word/document.xml\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument\"/&gt;&lt;/rel:Relationships&gt;&lt;/pkg:xmlData&gt;&lt;/pkg:part&gt;&lt;pkg:part pkg:name=\"/word/document.xml\" pkg:contentType=\"application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml\"&gt;&lt;pkg:xmlData&gt;&lt;w:document xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"  &gt;&lt;w:body&gt;&lt;w:p &gt;&lt;w:pPr&gt;&lt;w:pStyle w:val=\"Heading1\"/&gt;&lt;/w:pPr&gt;&lt;w:r&gt;&lt;w:t xml:space=\"preserve\"&gt;Some text&lt;/w:t&gt;&lt;/w:r&gt;&lt;/w:p&gt;&lt;/w:body&gt;&lt;/w:document&gt;&lt;/pkg:xmlData&gt;&lt;/pkg:part&gt;&lt;/pkg:package&gt;</oda:answer>";
+                //                xml = "<oda:answer id=\"" + q.id + "\" xmlns:oda=\"http://opendope.org/answers\">&lt;?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?&gt;&lt;pkg:package xmlns:pkg=\"http://schemas.microsoft.com/office/2006/xmlPackage\" &gt;&lt;pkg:part pkg:name=\"/_rels/.rels\" pkg:contentType=\"application/vnd.openxmlformats-package.relationships+xml\"&gt;&lt;pkg:xmlData&gt;&lt;rel:Relationships xmlns:rel=\"http://schemas.openxmlformats.org/package/2006/relationships\"&gt;&lt;rel:Relationship Id=\"rId1\" Target=\"word/document.xml\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument\"/&gt;&lt;/rel:Relationships&gt;&lt;/pkg:xmlData&gt;&lt;/pkg:part&gt;&lt;pkg:part pkg:name=\"/word/document.xml\" pkg:contentType=\"application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml\"&gt;&lt;pkg:xmlData&gt;&lt;w:document xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"  &gt;&lt;w:body&gt;&lt;w:p &gt;&lt;w:pPr&gt;&lt;w:pStyle w:val=\"Heading1\"/&gt;&lt;/w:pPr&gt;&lt;w:r&gt;&lt;w:t xml:space=\"preserve\"&gt;Some text&lt;/w:t&gt;&lt;/w:r&gt;&lt;/w:p&gt;&lt;/w:body&gt;&lt;/w:document&gt;&lt;/pkg:xmlData&gt;&lt;/pkg:part&gt;&lt;/pkg:package&gt;</oda:answer>";
                 xml = "<oda:answer id=\"" + q.id + "\" xmlns:oda=\"http://opendope.org/answers\">&lt;?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?&gt;&lt;pkg:package xmlns:pkg=\"http://schemas.microsoft.com/office/2006/xmlPackage\" &gt;&lt;pkg:part pkg:name=\"/_rels/.rels\" pkg:contentType=\"application/vnd.openxmlformats-package.relationships+xml\"&gt;&lt;pkg:xmlData&gt;&lt;rel:Relationships xmlns:rel=\"http://schemas.openxmlformats.org/package/2006/relationships\"&gt;&lt;rel:Relationship Id=\"rId1\" Target=\"word/document.xml\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument\"/&gt;&lt;/rel:Relationships&gt;&lt;/pkg:xmlData&gt;&lt;/pkg:part&gt;&lt;pkg:part pkg:name=\"/word/document.xml\" pkg:contentType=\"application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml\"&gt;&lt;pkg:xmlData&gt;&lt;w:document xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"  &gt;&lt;w:body&gt;&lt;w:p &gt;&lt;w:r&gt;&lt;w:t&gt;Some rich text&lt;/w:t&gt;&lt;/w:r&gt;&lt;/w:p&gt;&lt;/w:body&gt;&lt;/w:document&gt;&lt;/pkg:xmlData&gt;&lt;/pkg:part&gt;&lt;/pkg:package&gt;</oda:answer>";
-            } else // usual case
+            }
+            else if (formDataType.controlDataTypeMAIN1.controlDataType1.isXHTML())
+            {
+                xml = "<oda:answer id=\"" + q.id + "\" xmlns:oda=\"http://opendope.org/answers\">&lt;div&gt;&lt;p&gt;dummy content&lt;/p&gt;&lt;/div&gt;</oda:answer>";
+
+            }
+            else // usual case
             {
                 //string xml = "<answer id=\"" + ID + "\" xmlns=\"http://opendope.org/answers\"/>";
                 xml = "<oda:answer id=\"" + q.id + "\" xmlns:oda=\"http://opendope.org/answers\">" + sampleAnswer + "</oda:answer>";
@@ -345,11 +351,15 @@ namespace OpenDope_AnswerFormat
                 td = new TagData("");
                 td.set("od:xpath", xppe.xpathId);
 
-                if (formDataType.controlDataTypeMAIN1.controlDataType1.isFlatOpc() )
+                if (formDataType.controlDataTypeMAIN1.controlDataType1.isFlatOpc())
                 {
                     // od:progid=Word.Document
                     td.set("od:progid", "Word.Document");
-                    // TODO: set richtext?
+                }
+                else if (formDataType.controlDataTypeMAIN1.controlDataType1.isXHTML() )
+                {
+                    // od:ContentType=application/xhtml+xml
+                    td.set("od:ContentType", "application/xhtml+xml");
                 }
 
                 cc.Tag = td.asQueryString();
@@ -363,7 +373,9 @@ namespace OpenDope_AnswerFormat
 
                 //cc.Title = "Data Value [" + this.answerID.Text + "]"; // // This used if they later click edit
                 cc.Title = q.text;
-                if (formDataType.controlDataTypeMAIN1.controlDataType1.isFlatOpc())
+                if (formDataType.controlDataTypeMAIN1.controlDataType1.isFlatOpc()
+                    || formDataType.controlDataTypeMAIN1.controlDataType1.isXHTML()
+                    )
                 {
                     cc.Type = Word.WdContentControlType.wdContentControlRichText;
                 }
