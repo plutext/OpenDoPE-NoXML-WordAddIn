@@ -53,13 +53,16 @@ namespace OpenDope_AnswerFormat
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageManual = new System.Windows.Forms.TabPage();
             this.controlQuestionResponsesFixed1 = new OpenDope_AnswerFormat.Controls.ControlQuestionResponsesFixed();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxInsertControl = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPageManual.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(36, 395);
+            this.buttonOK.Location = new System.Drawing.Point(29, 444);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 1;
@@ -69,7 +72,7 @@ namespace OpenDope_AnswerFormat
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(145, 395);
+            this.buttonCancel.Location = new System.Drawing.Point(130, 444);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 2;
@@ -83,18 +86,19 @@ namespace OpenDope_AnswerFormat
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(468, 457);
+            this.tabControl1.Size = new System.Drawing.Size(468, 516);
             this.tabControl1.TabIndex = 4;
             // 
             // tabPageManual
             // 
+            this.tabPageManual.Controls.Add(this.groupBox1);
             this.tabPageManual.Controls.Add(this.controlQuestionResponsesFixed1);
             this.tabPageManual.Controls.Add(this.buttonOK);
             this.tabPageManual.Controls.Add(this.buttonCancel);
             this.tabPageManual.Location = new System.Drawing.Point(4, 22);
             this.tabPageManual.Name = "tabPageManual";
             this.tabPageManual.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageManual.Size = new System.Drawing.Size(460, 431);
+            this.tabPageManual.Size = new System.Drawing.Size(460, 490);
             this.tabPageManual.TabIndex = 0;
             this.tabPageManual.Text = "Manual";
             this.tabPageManual.UseVisualStyleBackColor = true;
@@ -103,19 +107,42 @@ namespace OpenDope_AnswerFormat
             // 
             this.controlQuestionResponsesFixed1.Location = new System.Drawing.Point(8, 9);
             this.controlQuestionResponsesFixed1.Name = "controlQuestionResponsesFixed1";
-            this.controlQuestionResponsesFixed1.Size = new System.Drawing.Size(450, 374);
+            this.controlQuestionResponsesFixed1.Size = new System.Drawing.Size(450, 429);
             this.controlQuestionResponsesFixed1.TabIndex = 3;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBoxInsertControl);
+            this.groupBox1.Location = new System.Drawing.Point(19, 373);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(395, 54);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Content Control";
+            // 
+            // checkBoxInsertControl
+            // 
+            this.checkBoxInsertControl.AutoSize = true;
+            this.checkBoxInsertControl.Location = new System.Drawing.Point(53, 24);
+            this.checkBoxInsertControl.Name = "checkBoxInsertControl";
+            this.checkBoxInsertControl.Size = new System.Drawing.Size(251, 17);
+            this.checkBoxInsertControl.TabIndex = 0;
+            this.checkBoxInsertControl.Text = "Add content control (show answer in document)";
+            this.checkBoxInsertControl.UseVisualStyleBackColor = true;
+            this.checkBoxInsertControl.CheckedChanged += new System.EventHandler(this.checkBoxInsertControl_CheckedChanged);
             // 
             // FormResponses
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(492, 481);
+            this.ClientSize = new System.Drawing.Size(492, 540);
             this.Controls.Add(this.tabControl1);
             this.Name = "FormResponses";
             this.Text = "Add Multiple Choice Responses";
             this.tabControl1.ResumeLayout(false);
             this.tabPageManual.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -127,5 +154,7 @@ namespace OpenDope_AnswerFormat
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPageManual;
         public Controls.ControlQuestionResponsesFixed controlQuestionResponsesFixed1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        public System.Windows.Forms.CheckBox checkBoxInsertControl;
     }
 }

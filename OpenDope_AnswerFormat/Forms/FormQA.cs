@@ -396,6 +396,8 @@ namespace OpenDope_AnswerFormat
                 sampleAnswer = "«multiple choice»";
             }
 
+            bool ccNeeded = formResponses.checkBoxInsertControl.Checked;
+
             formResponses.Dispose();
             // TODO - handle cancel
 
@@ -466,23 +468,30 @@ namespace OpenDope_AnswerFormat
 
             // save is below
 
-            if (bindToControl)
+            if (bindToControl )
             {
-                td = new TagData("");
-                td.set("od:xpath", xppe.xpathId);
-                cc.Tag = td.asQueryString();
+                if (ccNeeded /* MCQ case: user checked box */ )
+                {
+                    td = new TagData("");
+                    td.set("od:xpath", xppe.xpathId);
+                    cc.Tag = td.asQueryString();
 
-                // TODO - allow ID to be specified
+                    // TODO - allow ID to be specified
 
 
-                // At this point, answer should be present.  Sanity check!
+                    // At this point, answer should be present.  Sanity check!
 
-                // TODO
+                    // TODO
 
-                //cc.Title = "Data Value [" + this.answerID.Text + "]"; // // This used if they later click edit
-                cc.Title = q.text;
-                cc.XMLMapping.SetMapping(xpath, "xmlns:oda='http://opendope.org/answers'", model.answersPart); //model.userParts[0]);
-            }
+                    //cc.Title = "Data Value [" + this.answerID.Text + "]"; // // This used if they later click edit
+                    cc.Title = q.text;
+                    cc.XMLMapping.SetMapping(xpath, "xmlns:oda='http://opendope.org/answers'", model.answersPart); //model.userParts[0]);
+                }
+                else /* MCQ case: user didn't check box, so no cc required! */
+                {
+                    cc.Delete(true);
+                }
+            } 
 
 
 
