@@ -5,7 +5,8 @@ Because the XML format is fixed, there is no need for the author to be exposed t
 This makes this tool suitable for non-technical authors (as compared to the other authoring
 tool OpenDoPE-Mapping-WordAddIn).
 
-If you want to try it out, there's an installer at https://github.com/plutext/OpenDoPE-NoXML-WordAddIn/blob/master/BinaryReleases/OpenDoPE-NoXML-WordAddIn-1_01?raw=true
+If you want to try it out, there's an installer at 
+https://github.com/plutext/OpenDoPE-NoXML-WordAddIn/blob/master/BinaryReleases/OpenDoPE-NoXML-WordAddIn-1_01.exe?raw=true
 
 The fixed XML format is very simple:
 
