@@ -828,6 +828,62 @@ namespace OpenDope_AnswerFormat
 
         }
 
+    public void buttonComponentUse_Click(Office.IRibbonControl control)
+        {
+            Word.Document document = Globals.ThisAddIn.Application.ActiveDocument;
+            //Model model = Model.ModelFactory(document);
+
+            FabDocxState fabDocxState = getState();
+            fabDocxState.inPlutextAdd = true;
+
+            Word.UndoRecord ur = getWordApp().UndoRecord;
+            if (majorVersion >= 14)
+            {
+                getWordApp().UndoRecord.StartCustomRecord("FabDocx Add Component");
+            }
+
+            // Create control
+            Word.ContentControl cc = null;
+            object missing = System.Type.Missing;
+            try
+            {
+                cc = document.ContentControls.Add(Word.WdContentControlType.wdContentControlRichText, ref missing);
+                cc.Title = "Component";
+                // cc.Tag = "od:component";
+                cc.SetPlaceholderText(null, null,
+                    "Component.");
+
+            }
+            catch (System.Exception)
+            {
+                if (majorVersion >= 14)
+                {
+                    getWordApp().UndoRecord.EndCustomRecord();
+                }
+                MessageBox.Show("Selection must be either part of a single paragraph, or one or more whole paragraphs");
+                fabDocxState.inPlutextAdd = false;
+                return;
+            }
+
+            Forms.FormComponent formComponent = new Forms.FormComponent();
+            Controls.UserControlComponentIRI componentUC = formComponent.userControlComponentIRI1;
+            componentUC.initFields(fabDocxState.model, cc);
+            formComponent.ShowDialog();
+            formComponent.Dispose();
+
+            if (majorVersion >= 14)
+            {
+                getWordApp().UndoRecord.EndCustomRecord();
+            }
+
+            if (fabDocxState.TaskPane.Visible)
+            {
+                Controls.LogicTaskPaneUserControl ltp = (Controls.LogicTaskPaneUserControl)fabDocxState.TaskPane.Control;
+                ltp.populateLogicInUse();
+            }
+
+        }
+
         public void buttonBuildingBlockSave_Click(Office.IRibbonControl control)
         {
             Word.Document document = Globals.ThisAddIn.Application.ActiveDocument;
@@ -1286,6 +1342,13 @@ namespace OpenDope_AnswerFormat
             if (getState() == null) return false;
             else return true;
         }
+
+        public Boolean IsComponentUseEnabled(Office.IRibbonControl control)
+        {
+            if (getState() == null) return false;
+            else return true;
+        }
+
         public Boolean IsEditQuestionEnabled(Office.IRibbonControl control)
         {
             if (getState() == null) return false;

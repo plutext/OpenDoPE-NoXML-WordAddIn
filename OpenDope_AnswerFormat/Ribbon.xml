@@ -90,7 +90,24 @@ getEnabled="IsRepeatEnabled"
                   size="large" />
 
         </group>
+
+        <!-- experimental 2018 06 25 -->
+        <group id="plutextGroupComponents" label="Components">
+
+          <button id="buttonComponentUse"
+                    imageMso="OutlineGroup"
+            onAction="buttonComponentUse_Click"
+                  label="Reuse"
+getEnabled="IsComponentUseEnabled"
+                  size="large" />
+
+        </group>
         
+<!--  Merge logic in a building block.  Commented out 2018 06 25,
+      because buttonBuildingBlockUse_Click already commented
+      (ie no point creating a BuildingBlock in production,
+       if you can't use it!)
+
         <group id="plutextGroupLibrary" label="Library">
 
           <button id="buttonBuildingBlockSave"
@@ -105,12 +122,11 @@ getEnabled="IsBuildingBlockSaveEnabled"
                   label="Reuse"
                   size="large"
                      />
-<!--
 id="buttonBuildingBlockUse"
             onAction="buttonBuildingBlockUse_Click"
 getEnabled="IsBuildingBlockUseEnabled"
--->
         </group>
+-->
         
         <group id="plutextGroup5" label="Information">
 
