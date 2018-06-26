@@ -338,11 +338,18 @@ namespace OpenDope_AnswerFormat
         void extendedDocument_ContentControlBeforeStoreUpdate(Word.ContentControl cc, ref string Content)
         {
             log.Debug("Updating store with string: '" + Content + "', for cc " + cc.Title);
-            if (Content.Contains("\n"))
+            if (Content.Contains("\n") )
             {
                 // carriage return is /n; there is no /r
-                MessageBox.Show("You typed inside an Answer control, which you probably didn't want to do.  Ctrl Z to Undo. \n\n Press 'Show Tags' if you need to see exactly where your content controls start and finish. ");
-                // NB Ctrl Z causes the content control to be deleted, then added again! ie those events fire.
+                //if (cc.GetType().Equals(Word.WdContentControlType.wdContentControlRichText))
+                // How to detect a rich text content control? Above doesn't seem to work...
+                if (cc.Tag.Contains("od:progid"))
+                {
+                    // it is rich text containing Flat OPC XML; allow the user to edit the content control contents.
+                } else {
+                    MessageBox.Show("You typed inside an Answer control, which you probably didn't want to do.  Ctrl Z to Undo. \n\n Press 'Show Tags' if you need to see exactly where your content controls start and finish. ");
+                    // NB Ctrl Z causes the content control to be deleted, then added again! ie those events fire.
+                }
             }
         }
 

@@ -373,11 +373,23 @@ namespace OpenDope_AnswerFormat
 
                 //cc.Title = "Data Value [" + this.answerID.Text + "]"; // // This used if they later click edit
                 cc.Title = q.text;
-                if (formDataType.controlDataTypeMAIN1.controlDataType1.isFlatOpc()
-                    || formDataType.controlDataTypeMAIN1.controlDataType1.isXHTML()
-                    )
+                if (formDataType.controlDataTypeMAIN1.controlDataType1.isFlatOpc())
                 {
                     cc.Type = Word.WdContentControlType.wdContentControlRichText;
+                    cc.Title = "Word: " + xppe.xpathId;
+                    try {
+                        // add w15 databinding
+                        cc.XMLMapping.SetMapping(xpath, "xmlns:oda='http://opendope.org/answers'", model.answersPart); //model.userParts[0]);
+                    } catch (Exception e)
+                    {
+                        // Word 2010 says "Data binding cannot be added for rich text controls"
+                        //MessageBox.Show(e.Message);
+                    }
+                }
+                else if (formDataType.controlDataTypeMAIN1.controlDataType1.isXHTML() )
+                {
+                    cc.Type = Word.WdContentControlType.wdContentControlRichText;
+                    cc.Title = "XHTML: " + xppe.xpathId;
                 }
                 else
                 {
