@@ -41,7 +41,7 @@ namespace OpenDope_AnswerFormat
         {
             Word.Document document = Globals.ThisAddIn.Application.ActiveDocument;
 
-            FabDocxState fabDocxState = (FabDocxState)Globals.ThisAddIn.Application.ActiveDocument.GetVstoObject(Globals.Factory).Tag;
+        FabDocxState fabDocxState = (FabDocxState)Globals.ThisAddIn.Application.ActiveDocument.GetVstoObject(Globals.Factory).Tag;
 
             Model model = fabDocxState.model;
             Office.CustomXMLPart answersPart = model.answersPart; //.userParts[0]; // TODO: make this better
@@ -99,7 +99,7 @@ namespace OpenDope_AnswerFormat
                     {
                         log.Error("Consistency issue: couldn't find question {0} used in xpath {1}", xp.questionID, xpathID);
                     }
-                    else
+                    else if (!questions.Contains(q)) 
                     {
                         questions.Add(q);
                     }
@@ -182,12 +182,109 @@ namespace OpenDope_AnswerFormat
             try
             {
                 fabDocxState.inPlutextAdd = true;
-                wrappingRepeatCC = document.ContentControls.Add(Word.WdContentControlType.wdContentControlRichText, ref oRng);
+
+                // 2016 UI doesn't allow you wrap a content control around multiple table rows; it silently restricts it to 1 row.
+                // To get around this:
+                Word.Selection selection = Globals.ThisAddIn.Application.Selection;
+                if (selection.Tables.Count==1)
+                {
+                    //MessageBox.Show("detected a table");
+                    //foreach (Word.Table tbl in selection.Tables)
+                    //{
+                    //    MessageBox.Show("table with " + tbl.Rows.Count);
+                    //}
+                    Word.Table table = selection.Tables[1]; // 1-based index, and TopLevelTables only contains entire tables!
+
+                    // TODO if (wholeTableInside)
+                    // else
+
+                    //bool handledFirstSelectedRow = false;
+                    Word.Table newTable = null;
+                    Word.Row rowFirstInTable = null;
+                    //Word.Row rowLastInTable = null;
+                    Word.Row rowInSelectionFirst=null;
+                    Word.Row rowAfterSelectionFirst = null;
+                    int rowsInSelection = 0;
+                    foreach (Word.Row row in table.Rows)
+                    {
+                        if (rowFirstInTable==null)
+                        {
+                            rowFirstInTable = row;
+                        }
+
+                        // MessageBox.Show("considering a row ... ");
+                        if (row.Range.Start >= selection.Start 
+                            && row.Range.Start <= selection.End
+                            && row.Range.End <= selection.End
+                            )
+                        {
+                            if (rowInSelectionFirst==null) {
+                                MessageBox.Show("found first selected row");
+                                rowInSelectionFirst = row;
+                            }
+                        } else if (row.Range.Start >= selection.End)
+                        {
+                            if (rowAfterSelectionFirst==null)
+                            {
+                                MessageBox.Show("found first excluded row");
+                                rowAfterSelectionFirst = row;
+                            }
+                        }
+                        //rowLastInTable = row;
+                        if (rowInSelectionFirst!=null && rowAfterSelectionFirst==null)
+                        {
+                            rowsInSelection++;
+                        }
+                    }
+
+                    if (rowsInSelection > 1)
+                    {
+                        // now split; didn't do this before, so we don't upset selection
+                        // second split: do this first
+                        if (rowAfterSelectionFirst != null)
+                        {
+                            table.Split(rowAfterSelectionFirst);
+                        }
+
+                        // first split
+                        if (rowInSelectionFirst == rowFirstInTable) {
+                            // no need to split, since no rows above
+                            newTable = table;
+                        } else
+                        {
+                            newTable = table.Split(rowInSelectionFirst);
+                        }
+
+                        if (newTable != null)
+                        {
+                            object tblRng = newTable.Range;
+                            wrappingRepeatCC = document.ContentControls.Add(Word.WdContentControlType.wdContentControlRichText, ref tblRng);
+                        }
+                    } else
+                    {
+                        // its just a single row, so do it the normal way
+                        wrappingRepeatCC = document.ContentControls.Add(Word.WdContentControlType.wdContentControlRichText, ref oRng);
+
+                    }
+                } else
+                {
+                    // usual case
+                    wrappingRepeatCC = document.ContentControls.Add(Word.WdContentControlType.wdContentControlRichText, ref oRng);
+                }
+
+
+
+
+
+                //wrappingRepeatCC.Range.Expand(Word.WdUnits.wdRow);
+
+
                 //cc.MultiLine = true; // Causes error for RichText
             }
             catch (System.Exception ex)
             {
                 log.Warn(ex);
+                MessageBox.Show(ex.Message);
                 MessageBox.Show("Selection must be either part of a single paragraph, or one or more whole paragraphs");
                 fabDocxState.inPlutextAdd = false;
                 return;
