@@ -198,10 +198,8 @@ namespace OpenDope_AnswerFormat
                     // TODO if (wholeTableInside)
                     // else
 
-                    //bool handledFirstSelectedRow = false;
                     Word.Table newTable = null;
                     Word.Row rowFirstInTable = null;
-                    //Word.Row rowLastInTable = null;
                     Word.Row rowInSelectionFirst=null;
                     Word.Row rowAfterSelectionFirst = null;
                     int rowsInSelection = 0;
@@ -219,18 +217,17 @@ namespace OpenDope_AnswerFormat
                             )
                         {
                             if (rowInSelectionFirst==null) {
-                                MessageBox.Show("found first selected row");
+                                //MessageBox.Show("found first selected row");
                                 rowInSelectionFirst = row;
                             }
                         } else if (row.Range.Start >= selection.End)
                         {
                             if (rowAfterSelectionFirst==null)
                             {
-                                MessageBox.Show("found first excluded row");
+                                //MessageBox.Show("found first excluded row");
                                 rowAfterSelectionFirst = row;
                             }
                         }
-                        //rowLastInTable = row;
                         if (rowInSelectionFirst!=null && rowAfterSelectionFirst==null)
                         {
                             rowsInSelection++;
@@ -241,25 +238,47 @@ namespace OpenDope_AnswerFormat
                     {
                         // now split; didn't do this before, so we don't upset selection
                         // second split: do this first
+                        Word.Table lastTbl = null;
                         if (rowAfterSelectionFirst != null)
                         {
-                            table.Split(rowAfterSelectionFirst);
+                            lastTbl = table.Split(rowAfterSelectionFirst);
                         }
 
                         // first split
+                        bool firstSplit = false;
                         if (rowInSelectionFirst == rowFirstInTable) {
                             // no need to split, since no rows above
                             newTable = table;
                         } else
                         {
                             newTable = table.Split(rowInSelectionFirst);
+                            firstSplit = true;
                         }
 
-                        if (newTable != null)
+                        object tblRng = newTable.Range;
+                        wrappingRepeatCC = document.ContentControls.Add(Word.WdContentControlType.wdContentControlRichText, ref tblRng);
+
+                        // now remove the unwanted inserted paragraphs
+                        if (lastTbl!=null)
                         {
-                            object tblRng = newTable.Range;
-                            wrappingRepeatCC = document.ContentControls.Add(Word.WdContentControlType.wdContentControlRichText, ref tblRng);
+                            Word.Range lastRng = lastTbl.Range;
+                            lastRng.Collapse(Word.WdCollapseDirection.wdCollapseStart);
+                            //lastRng.InsertBefore("Z");
+                            lastRng.Move(Word.WdUnits.wdCharacter, -1);
+                            lastRng.Delete(Word.WdUnits.wdCharacter, 1);
+                            //lastRng.InsertBefore("Z");
                         }
+
+                        if (firstSplit) {
+                            Word.Range fsRng = newTable.Range;
+                            fsRng.Collapse(Word.WdCollapseDirection.wdCollapseStart);
+                            //fsRng.InsertBefore("A");
+                            fsRng.Move(Word.WdUnits.wdCharacter, -1);
+                            fsRng.Delete(Word.WdUnits.wdCharacter, 1);
+                            //fsRng.InsertBefore("A");
+
+                        }
+
                     } else
                     {
                         // its just a single row, so do it the normal way
