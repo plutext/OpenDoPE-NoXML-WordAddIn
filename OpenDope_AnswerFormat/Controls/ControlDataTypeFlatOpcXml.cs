@@ -42,10 +42,6 @@ namespace OpenDope_AnswerFormat.Controls
 
         public void populateControl(xpathsXpath xpathObj, string sampleAnswer, bool isInteger, string hint)
         {
-            this.textBoxSampleAnswer.Text = sampleAnswer;
-
-            this.textBoxHint.Text = hint;
-
         }
 
         public void populateXPath(xpathsXpath xpathObj)
@@ -58,10 +54,10 @@ namespace OpenDope_AnswerFormat.Controls
 
         }
 
-        public string getSampleAnswer()
-        {
-            return this.textBoxSampleAnswer.Text;
-        }
+        //public string getSampleAnswer()
+        //{
+        //    return this.textBoxSampleAnswer.Text;
+        //}
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {

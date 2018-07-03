@@ -426,7 +426,8 @@ namespace OpenDope_AnswerFormat.Controls
             }
             else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("Word"))
             {
-                return this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.getSampleAnswer();
+                return null;
+                //this.ControlDataTypeMAIN.controlDataTypeFlatOpcXml.getSampleAnswer();
             }
             else if (listBoxDataTypes.SelectedItem.ToString().StartsWith("XHTML"))
             {
