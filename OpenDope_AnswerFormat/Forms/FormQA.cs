@@ -445,6 +445,14 @@ namespace OpenDope_AnswerFormat
             }
 
             bool ccNeeded = formResponses.checkBoxInsertControl.Checked;
+            if (ccNeeded 
+                    && formResponses.controlQuestionResponsesFixed1.radioTypeBoolean.Checked
+                    && formResponses.checkBoxContentControl.Checked)
+            {
+                cc.Type = Word.WdContentControlType.wdContentControlCheckBox;
+
+                // Later, support ComboBox, Dropdownlist
+            }
 
             formResponses.Dispose();
             // TODO - handle cancel

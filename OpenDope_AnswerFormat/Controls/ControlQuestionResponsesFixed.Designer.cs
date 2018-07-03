@@ -409,7 +409,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.RadioButton radioTypeBoolean;
+        public System.Windows.Forms.RadioButton radioTypeBoolean;
         private System.Windows.Forms.RadioButton radioTypeDate;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.RadioButton radioButton6;

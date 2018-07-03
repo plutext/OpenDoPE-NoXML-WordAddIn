@@ -35,6 +35,8 @@ namespace OpenDope_AnswerFormat
         {
             InitializeComponent();
             this.controlQuestionResponsesFixed1.init(responseFixed);
+            this.controlQuestionResponsesFixed1.radioTypeBoolean.CheckedChanged += new System.EventHandler(this.radioTypeBoolean_CheckedChanged);
+
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -55,6 +57,30 @@ namespace OpenDope_AnswerFormat
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Mbox.ShowSimpleMsgBoxError("Not implemented yet!");
+        }
+
+        private void radioTypeBoolean_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.controlQuestionResponsesFixed1.radioTypeBoolean.Checked)
+            {
+                this.checkBoxContentControl.Enabled = true;
+            } else
+            {
+                this.checkBoxContentControl.Enabled = false;
+            }
+        }
+
+        private void checkBoxContentControl_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxContentControl.Checked)
+            {
+                // if they want to insert a checkbox control,
+                // then of course they want to insert a control!
+                this.checkBoxInsertControl.Checked = true;
+            }
+            // This UI will need to be rethought if/when we 
+            // support adding ComboBox, Dropdownlist content controls.
+
         }
     }
 }

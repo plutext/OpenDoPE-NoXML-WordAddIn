@@ -52,9 +52,10 @@ namespace OpenDope_AnswerFormat
             this.buttonCancel = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageManual = new System.Windows.Forms.TabPage();
-            this.controlQuestionResponsesFixed1 = new OpenDope_AnswerFormat.Controls.ControlQuestionResponsesFixed();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBoxInsertControl = new System.Windows.Forms.CheckBox();
+            this.checkBoxContentControl = new System.Windows.Forms.CheckBox();
+            this.controlQuestionResponsesFixed1 = new OpenDope_AnswerFormat.Controls.ControlQuestionResponsesFixed();
             this.tabControl1.SuspendLayout();
             this.tabPageManual.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -103,15 +104,9 @@ namespace OpenDope_AnswerFormat
             this.tabPageManual.Text = "Manual";
             this.tabPageManual.UseVisualStyleBackColor = true;
             // 
-            // controlQuestionResponsesFixed1
-            // 
-            this.controlQuestionResponsesFixed1.Location = new System.Drawing.Point(8, 9);
-            this.controlQuestionResponsesFixed1.Name = "controlQuestionResponsesFixed1";
-            this.controlQuestionResponsesFixed1.Size = new System.Drawing.Size(450, 429);
-            this.controlQuestionResponsesFixed1.TabIndex = 3;
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxContentControl);
             this.groupBox1.Controls.Add(this.checkBoxInsertControl);
             this.groupBox1.Location = new System.Drawing.Point(19, 373);
             this.groupBox1.Name = "groupBox1";
@@ -123,13 +118,31 @@ namespace OpenDope_AnswerFormat
             // checkBoxInsertControl
             // 
             this.checkBoxInsertControl.AutoSize = true;
-            this.checkBoxInsertControl.Location = new System.Drawing.Point(53, 24);
+            this.checkBoxInsertControl.Location = new System.Drawing.Point(15, 24);
             this.checkBoxInsertControl.Name = "checkBoxInsertControl";
             this.checkBoxInsertControl.Size = new System.Drawing.Size(251, 17);
             this.checkBoxInsertControl.TabIndex = 0;
             this.checkBoxInsertControl.Text = "Add content control (show answer in document)";
             this.checkBoxInsertControl.UseVisualStyleBackColor = true;
-            //this.checkBoxInsertControl.CheckedChanged += new System.EventHandler(this.checkBoxInsertControl_CheckedChanged);
+            // 
+            // checkBoxContentControl
+            // 
+            this.checkBoxContentControl.AutoSize = true;
+            this.checkBoxContentControl.Enabled = false;
+            this.checkBoxContentControl.Location = new System.Drawing.Point(272, 24);
+            this.checkBoxContentControl.Name = "checkBoxContentControl";
+            this.checkBoxContentControl.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxContentControl.TabIndex = 1;
+            this.checkBoxContentControl.Text = "Add as checkbox";
+            this.checkBoxContentControl.UseVisualStyleBackColor = true;
+            this.checkBoxContentControl.CheckedChanged += new System.EventHandler(this.checkBoxContentControl_CheckedChanged);
+            // 
+            // controlQuestionResponsesFixed1
+            // 
+            this.controlQuestionResponsesFixed1.Location = new System.Drawing.Point(8, 9);
+            this.controlQuestionResponsesFixed1.Name = "controlQuestionResponsesFixed1";
+            this.controlQuestionResponsesFixed1.Size = new System.Drawing.Size(450, 429);
+            this.controlQuestionResponsesFixed1.TabIndex = 3;
             // 
             // FormResponses
             // 
@@ -156,5 +169,6 @@ namespace OpenDope_AnswerFormat
         public Controls.ControlQuestionResponsesFixed controlQuestionResponsesFixed1;
         private System.Windows.Forms.GroupBox groupBox1;
         public System.Windows.Forms.CheckBox checkBoxInsertControl;
+        public System.Windows.Forms.CheckBox checkBoxContentControl;
     }
 }
