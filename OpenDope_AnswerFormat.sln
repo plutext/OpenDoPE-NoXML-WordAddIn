@@ -12,6 +12,11 @@ Project("{ACA99D24-2A4B-4C16-9E92-13D6ABC4AC35}") = "OpenDoPE-NoXML-Installer", 
 		{E9F3B8A5-B601-45DF-B85E-DE9EC3ADB4CF} = {E9F3B8A5-B601-45DF-B85E-DE9EC3ADB4CF}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{91662C7F-C4FB-47AB-B7D5-574FF7754BD3}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU

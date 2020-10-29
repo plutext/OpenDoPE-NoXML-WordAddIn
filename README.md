@@ -6,7 +6,7 @@ This makes this tool suitable for non-technical authors (as compared to the othe
 tool OpenDoPE-Mapping-WordAddIn).
 
 If you want to try it out, there's an installer at 
-https://github.com/plutext/OpenDoPE-NoXML-WordAddIn/blob/master/BinaryReleases/OpenDoPE-NoXML-WordAddIn-1_02.exe?raw=true
+https://github.com/plutext/OpenDoPE-NoXML-WordAddIn/blob/master/BinaryReleases/OpenDoPE-NoXML-WordAddIn-1_20.exe?raw=true
 
 The fixed XML format is very simple:
 
