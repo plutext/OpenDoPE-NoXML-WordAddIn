@@ -306,7 +306,13 @@ namespace OpenDope_AnswerFormat
             //MessageBox.Show("task pane inited");
 
             // Load FabDocx.dotx
-            GlobalTemplateManager.GetGlobalTemplateManager();
+            try {
+                GlobalTemplateManager.GetGlobalTemplateManager();
+            }
+            catch (Exception e)
+            {
+                log.Error(e);  // can't write to dir?
+            }
 
         }
 

@@ -16,9 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Windows.Forms;
 
 using NLog;
@@ -66,7 +64,7 @@ namespace OpenDope_AnswerFormat
         /// </summary>
         string templatePath;
 
-        public static string FABDOCX_ADDIN = "FabDocxC.dotx";
+        public static string FABDOCX_ADDIN = "FabDocx.dotx";
 
         object missingType = System.Reflection.Missing.Value;
 
@@ -88,16 +86,8 @@ namespace OpenDope_AnswerFormat
         /// </summary>
         private void init()
         {
-            // Store it with the executing assembly.
-            // Will this get deleted every time the addin updates?
-            string path = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
-            if (path.StartsWith("file"))
-            {
-                path = path.Substring(8);
-            }
-            path = System.IO.Path.GetDirectoryName(path);
-
-            templatePath = path + @"\" + FABDOCX_ADDIN;
+            templatePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                  @FABDOCX_ADDIN);
 
             // Does the file exist?
             if (System.IO.File.Exists(templatePath))
