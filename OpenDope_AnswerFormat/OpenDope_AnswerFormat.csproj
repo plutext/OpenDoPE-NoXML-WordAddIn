@@ -41,8 +41,8 @@
     <PublishUrl>c:\publish\fabdocx-author\</PublishUrl>
     <InstallUrl>http://www.opendope.org/downloads/fabdocx-author/</InstallUrl>
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.24</ApplicationVersion>
-    <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
+    <ApplicationVersion>1.1.23.11</ApplicationVersion>
+    <AutoIncrementApplicationRevision>false</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
@@ -160,10 +160,11 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>PlutextCodeSigning2020_enc_TripleDES-SHA1.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>5C4336AD64FDC72A619A38EF0B90577805DBBDF8</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>FFD5ED8AF57F3758D5792850E7E4AD28DB6732E7</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -542,10 +543,7 @@
     <None Include="answers.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="OpenDope_AnswerFormat_TemporaryKey.pfx" />
     <None Include="Plutext.snk" />
-    <None Include="PlutextCodeSigning2017.pfx" />
-    <None Include="PlutextCodeSigning2020_enc_TripleDES-SHA1.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

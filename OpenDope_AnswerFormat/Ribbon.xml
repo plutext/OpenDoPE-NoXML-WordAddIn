@@ -91,7 +91,7 @@ getEnabled="IsRepeatEnabled"
 
         </group>
 
-        <!-- experimental 2018 06 25 -->
+        <!-- experimental 2018 06 25
         <group id="plutextGroupComponents" label="Components">
 
           <button id="buttonComponentUse"
@@ -102,6 +102,7 @@ getEnabled="IsComponentUseEnabled"
                   size="large" />
 
         </group>
+         -->
         
 <!--  Merge logic in a building block.  Commented out 2018 06 25,
       because buttonBuildingBlockUse_Click already commented

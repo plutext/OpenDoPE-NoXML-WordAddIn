@@ -41,7 +41,7 @@ namespace OpenDope_AnswerFormat
         {
             Word.Document document = Globals.ThisAddIn.Application.ActiveDocument;
 
-        FabDocxState fabDocxState = (FabDocxState)Globals.ThisAddIn.Application.ActiveDocument.GetVstoObject(Globals.Factory).Tag;
+            FabDocxState fabDocxState = (FabDocxState)Globals.ThisAddIn.Application.ActiveDocument.GetVstoObject(Globals.Factory).Tag;
 
             Model model = fabDocxState.model;
             Office.CustomXMLPart answersPart = model.answersPart; //.userParts[0]; // TODO: make this better
@@ -107,6 +107,7 @@ namespace OpenDope_AnswerFormat
                 else if (desc.Tag.Contains("od:condition"))
                 {
                     // TODO: find questions inside conditions
+                    // First, simple conditions
                 }
             }
 
