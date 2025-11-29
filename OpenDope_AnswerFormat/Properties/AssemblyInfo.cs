@@ -9,9 +9,9 @@ using System.Security;
 [assembly: AssemblyTitle("OpenDope_AnswerFormat")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Plutext Pty Ltd")]
 [assembly: AssemblyProduct("OpenDope_AnswerFormat")]
-[assembly: AssemblyCopyright("Copyright ©  2012-2023")]
+[assembly: AssemblyCopyright("Copyright ©  2012-2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,5 +33,5 @@ using System.Security;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.23.11")]
-[assembly: AssemblyFileVersion("1.1.23.11")]
+[assembly: AssemblyVersion("1.1.25.11")]
+[assembly: AssemblyFileVersion("1.1.25.11")]
